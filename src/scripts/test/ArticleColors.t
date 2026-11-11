@@ -96,7 +96,6 @@ my $Run = sub {
     return $Html;
 };
 
-# Presets: system default, personal choice, "follow default", stale value.
 $ConfigObject->Set(
     Key   => 'ArticleColors::ColorPreset',
     Value => 'Soft'
@@ -137,7 +136,6 @@ $ConfigObject->Set(
 $Html = $Run->();
 WrapperCountIs( $Html, 'Preset-Standard', 2, 'An unusable system value falls back to Standard' );
 
-# Channel classes.
 $Self->True(
     scalar( $Html =~ m{<tr\ class="agent\ Outgoing\ VisibleForCustomer\ \ \ Channel-Email"\ id="Row1"}xms ),
     'Email article row gets Channel-Email'
@@ -147,18 +145,15 @@ $Self->True(
     'Internal article row gets Channel-Internal'
 );
 
-# Idempotency: filtering already filtered markup must not add the classes again.
 my $Filter = Kernel::Output::HTML::OutputFilter::ArticleColors->new( UserID => $UserID );
 my $Twice  = $Html;
 $Filter->Run( Data => \$Twice );
 $Self->Is( $Twice, $Html, 'Running the filter on its own output changes nothing' );
 
-# A row of an unknown article is left alone.
 my $Unknown = $Row->( 9, 999999999 );
 $Filter->Run( Data => \$Unknown );
 $Self->False( scalar( $Unknown =~ m{Channel-}xms ), 'Row of an unknown article gets no channel class' );
 
-# No-op on non-scalar-ref data.
 $Self->True( $Filter->Run( Data => 'not a ref' ), 'Run tolerates unusable Data' );
 
 sub WrapperCountIs {
