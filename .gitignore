@@ -1,0 +1,14 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# Editors
+.idea/
+.vscode/
+
+# Znuny package manager leftovers
+*.save
+*.custom_backup
+
+# Built packages: attach them to a GitHub release instead of committing them
+*.opm
