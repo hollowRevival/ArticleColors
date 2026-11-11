@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<otrs_package version="1.1">
+    <Name>ArticleColors</Name>
+    <Version>1.0.0</Version>
+    <Framework>6.5.x</Framework>
+    <Vendor>Katla</Vendor>
+    <URL>https://github.com/hollowRevival/ArticleColors</URL>
+    <License>GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007</License>
+    <Description Lang="en">Color-codes the article list in AgentTicketZoom by sender (customer/agent), channel (email/internal) and failed delivery, instead of Znuny's visibility-based colors. Seven color presets, including three for color vision deficiencies (red-green, blue-yellow, total). Agents can pick their own preset in their personal preferences or follow the system default.</Description>
+    <Description Lang="sv">Färgkodar artikellistan i AgentTicketZoom efter avsändare (kund/agent), kanal (e-post/internt) och misslyckade utskick, i stället för Znunys synlighetsbaserade färger. Sju färgpresets, varav tre för färgseendeavvikelser (rödgrön, blågul, total). Agenter kan välja eget preset i personliga inställningar eller följa systemets standardval.</Description>
+    <PackageIsDownloadable>1</PackageIsDownloadable>
+    <ChangeLog Version="1.0.0" Date="2026-11-09">First release.</ChangeLog>
+    <Filelist>
+        <File Permission="660" Location="Kernel/Config/Files/XML/ArticleColors.xml" />
+        <File Permission="660" Location="Kernel/Language/sv_ArticleColors.pm" />
+        <File Permission="660" Location="Kernel/Output/HTML/OutputFilter/ArticleColors.pm" />
+        <File Permission="660" Location="var/httpd/htdocs/skins/Agent/default/css/ArticleColors.css" />
+        <File Permission="660" Location="scripts/test/ArticleColors.t" />
+    </Filelist>
+</otrs_package>

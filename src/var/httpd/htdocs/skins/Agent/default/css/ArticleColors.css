@@ -1,0 +1,171 @@
+/* ArticleColors: see ArticleColors.txt for the categories, presets and how they were validated. */
+
+.UseArticleColors {
+    --ac-c1-bg: #DCEFD0;
+    --ac-c1-hover: #BFD0B5;
+    --ac-c2-bg: #C0DAE1;
+    --ac-c2-hover: #A7BEC4;
+    --ac-c3-bg: #FCF8C4;
+    --ac-c3-hover: #DBD8AB;
+    --ac-c3-pattern: none;
+    --ac-c4-bg: #FADCDF;
+    --ac-c4-hover: #F0B8BE;
+}
+
+.UseArticleColors.Preset-HighContrast {
+    --ac-c1-bg: #B8DFA0;
+    --ac-c1-hover: #A0C28B;
+    --ac-c2-bg: #8FC3D1;
+    --ac-c2-hover: #7CAAB6;
+    --ac-c3-bg: #F5E96B;
+    --ac-c3-hover: #D5CB5D;
+    --ac-c4-bg: #F0A8B0;
+    --ac-c4-hover: #D19299;
+}
+
+.UseArticleColors.Preset-Soft {
+    --ac-c1-bg: #E9F4E2;
+    --ac-c1-hover: #CBD4C5;
+    --ac-c2-bg: #D8E9EE;
+    --ac-c2-hover: #BCCBCF;
+    --ac-c3-bg: #FBF8DE;
+    --ac-c3-hover: #DAD8C1;
+    --ac-c4-bg: #FCE9EB;
+    --ac-c4-hover: #DBCBCC;
+}
+
+.UseArticleColors.Preset-Cool {
+    --ac-c1-bg: #D7E6F7;
+    --ac-c1-hover: #BBC8D7;
+    --ac-c2-bg: #E1D7F0;
+    --ac-c2-hover: #C4BBD1;
+}
+
+.UseArticleColors.Preset-RedGreenCVD {
+    --ac-c1-bg: #C2E1F7;
+    --ac-c1-hover: #A9C4D7;
+    --ac-c2-bg: #4E8FC7;
+    --ac-c2-hover: #447CAD;
+    --ac-c2-fg: #000;
+    --ac-c3-bg: #F0D24A;
+    --ac-c3-hover: #D1B740;
+    --ac-c4-bg: #D6592F;
+    --ac-c4-hover: #E76033;
+    --ac-c4-fg: #000;
+    --ac-c4-icon: #000;
+}
+
+.UseArticleColors.Preset-BlueYellowCVD {
+    --ac-c1-bg: #E3F5EB;
+    --ac-c1-hover: #C5D5CC;
+    --ac-c2-bg: #2A8A5C;
+    --ac-c2-hover: #2D9563;
+    --ac-c2-fg: #000;
+    --ac-c3-bg: #EFAAD0;
+    --ac-c3-hover: #D094B5;
+    --ac-c4-bg: #832042;
+    --ac-c4-hover: #721C39;
+    --ac-c4-fg: #FFF;
+    --ac-c4-icon: #FFF;
+}
+
+.UseArticleColors.Preset-Achromatopsia {
+    --ac-c1-bg: #F5F5F5;
+    --ac-c1-hover: #D9D9D9;
+    --ac-c2-bg: #E8E8E8;
+    --ac-c2-hover: #CCCCCC;
+    --ac-c2-pattern: repeating-linear-gradient(45deg, rgba(0, 0, 0, 0.08) 0, rgba(0, 0, 0, 0.08) 2px, transparent 2px, transparent 8px);
+    --ac-c3-bg: #DCDCDC;
+    --ac-c3-hover: #C0C0C0;
+    --ac-c3-pattern: radial-gradient(rgba(0, 0, 0, 0.18) 1.2px, transparent 1.2px);
+    --ac-c3-pattern-size: 8px 8px;
+    --ac-c4-bg: #C8C8C8;
+    --ac-c4-hover: #ADADAD;
+    --ac-c4-icon: #000;
+    --ac-c4-pattern: repeating-linear-gradient(45deg, rgba(0, 0, 0, 0.22) 0, rgba(0, 0, 0, 0.22) 2px, transparent 2px, transparent 6px), repeating-linear-gradient(-45deg, rgba(0, 0, 0, 0.22) 0, rgba(0, 0, 0, 0.22) 2px, transparent 2px, transparent 6px);
+}
+
+/* The #000 fallback is the core skin's own text color, so presets without --ac-cN-fg leave text unchanged. */
+.UseArticleColors tr:where(.customer.Incoming.Channel-Email) {
+    --ac-bg: var(--ac-c1-bg);
+    --ac-hover: var(--ac-c1-hover);
+    --ac-pattern: var(--ac-c1-pattern, none);
+    --ac-pattern-size: var(--ac-c1-pattern-size, auto);
+    --ac-fg: var(--ac-c1-fg, #000);
+}
+
+.UseArticleColors tr:where(.agent.Outgoing.VisibleForCustomer.Channel-Email) {
+    --ac-bg: var(--ac-c2-bg);
+    --ac-hover: var(--ac-c2-hover);
+    --ac-pattern: var(--ac-c2-pattern, none);
+    --ac-pattern-size: var(--ac-c2-pattern-size, auto);
+    --ac-fg: var(--ac-c2-fg, #000);
+}
+
+/* Decided by channel alone: a note wrongly flagged as visible to the customer is still internal. */
+.UseArticleColors tr:where(.Channel-Internal) {
+    --ac-bg: var(--ac-c3-bg);
+    --ac-hover: var(--ac-c3-hover);
+    --ac-pattern: var(--ac-c3-pattern, none);
+    --ac-pattern-size: var(--ac-c3-pattern-size, auto);
+    --ac-fg: var(--ac-c3-fg, #000);
+}
+
+/*
+ * Core adds no row class for a failed send, only an icon in td.Channel.
+ * The rules above use :where() so they have no specificity beyond
+ * .UseArticleColors tr; this one then wins when both match the same row.
+ */
+.UseArticleColors tr:has(td.Channel i.fa-times.Error) {
+    --ac-bg: var(--ac-c4-bg);
+    --ac-hover: var(--ac-c4-hover);
+    --ac-pattern: var(--ac-c4-pattern, none);
+    --ac-pattern-size: var(--ac-c4-pattern-size, auto);
+    --ac-fg: var(--ac-c4-fg, #000);
+    --ac-icon: var(--ac-c4-icon, #9A0019);
+}
+
+/*
+ * Every selector puts a type selector in front of :is(). Core's CSS minifier
+ * drops the space before a colon, which would turn ".UseArticleColors :is(" into
+ * ".UseArticleColors:is(" and silently match nothing.
+ *
+ * !important: core's tr.NotVisibleForCustomer/tr.system rules would otherwise win.
+ */
+.UseArticleColors tr:is(
+    .customer.Incoming.Channel-Email,
+    .agent.Outgoing.VisibleForCustomer.Channel-Email,
+    .Channel-Internal,
+    :has(td.Channel i.fa-times.Error)
+) > td {
+    background-color: var(--ac-bg) !important;
+    background-image: var(--ac-pattern) !important;
+    background-size: var(--ac-pattern-size) !important;
+    border-color: var(--ac-hover);
+    color: var(--ac-fg);
+}
+
+.UseArticleColors tr:is(
+    .customer.Incoming.Channel-Email,
+    .agent.Outgoing.VisibleForCustomer.Channel-Email,
+    .Channel-Internal,
+    :has(td.Channel i.fa-times.Error)
+):is(.Active, :hover) > td {
+    background-color: var(--ac-hover) !important;
+    border-color: var(--ac-hover);
+}
+
+/* Core sets links in the article table to #000 with an id selector, hence #ArticleTable here. */
+.UseArticleColors #ArticleTable tr:is(
+    .customer.Incoming.Channel-Email,
+    .agent.Outgoing.VisibleForCustomer.Channel-Email,
+    .Channel-Internal,
+    :has(td.Channel i.fa-times.Error)
+) > td a {
+    color: var(--ac-fg);
+}
+
+/* Core's red (#ff505e) has under 3:1 contrast on most of these backgrounds. */
+.UseArticleColors td.Channel i.fa-times.Error {
+    color: var(--ac-icon, #9A0019);
+}
